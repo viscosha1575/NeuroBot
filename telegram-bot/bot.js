@@ -39,6 +39,16 @@ bot.onText(/\/start/, async (msg) => {
 bot.onText(/\/help/, (msg) => {
     bot.sendMessage(msg.chat.id, "Я могу отвечать на сообщения. Просто напиши мне что-нибудь!");
 });
+async function resetWebhookAndStart() {
+    try {
+        await bot.deleteWebhook();
+        console.log('Webhook удалён, бот работает в polling...');
+        bot.startPolling();
+    } catch (error) {
+        console.error('Ошибка при удалении Webhook:', error);
+    }
+}
+resetWebhookAndStart();
 
 // Ответ на обычные сообщения
 bot.on('message', (msg) => {
@@ -52,4 +62,3 @@ bot.on('message', (msg) => {
 app.listen(PORT, () => {
     console.log(`Бот запущен на порту ${PORT}`);
 });
-
