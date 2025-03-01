@@ -10,23 +10,17 @@ const app = express();
 
 const webAppUrl = 'https://eggsgame-6b328.web.app/';
 
-// Проверяем Webhook перед запуском
+// Удаляем Webhook перед запуском polling
 async function resetWebhookAndStart() {
     try {
-        const res = await bot.getWebhookInfo();
-        if (res.url) {
-            console.log(`Webhook активен (${res.url}), удаляем...`);
-            await fetch(`https://api.telegram.org/bot${TOKEN}/deleteWebhook`, { method: 'POST' });
-            console.log('Webhook удалён. Запускаем polling...');
-        } else {
-            console.log('Webhook не активен, сразу запускаем polling...');
-        }
+        await bot.deleteWebhook();
+        console.log('Webhook удалён. Запускаем polling...');
     } catch (error) {
-        console.error('Ошибка при проверке Webhook:', error);
+        console.error('Ошибка при удалении Webhook:', error);
     }
 }
 
-// Запуск бота
+// Запуск бота после удаления Webhook
 resetWebhookAndStart().then(() => {
     bot.onText(/\/start/, async (msg) => {
         const chatId = msg.chat.id;
