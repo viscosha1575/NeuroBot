@@ -1,7 +1,7 @@
 const TelegramBot = require('node-telegram-bot-api');
 
-// Замените 'YOUR_BOT_TOKEN' на ваш реальный токен бота
-const TOKEN = '7160696346:AAG_YupJCXOkPJzFDtex-U53GntCb6IwmtI';
+require('dotenv').config();
+const TOKEN = process.env.TOKEN;
 const bot = new TelegramBot(TOKEN, { polling: true });
 const webAppUrl = 'https://eggsgame-6b328.web.app/'
 
