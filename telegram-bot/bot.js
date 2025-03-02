@@ -27,9 +27,9 @@ app.post(`/bot${TOKEN}`, (req, res) => {
 // Обработчики команд
 bot.onText(/\/start/, async (msg) => {
     const chatId = msg.chat.id;
-    await bot.sendMessage(chatId, `Привет, ${msg.from.first_name}! Я твой Telegram-бот.`);
+    await bot.sendMessage(chatId, `Пример 3D игры в TG Mini App.`);
 
-    await bot.sendMessage(chatId, 'Начните игру', {
+    await bot.sendMessage(chatId, 'Тестировать', {
         reply_markup: {
             inline_keyboard: [
                 [
